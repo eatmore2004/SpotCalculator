@@ -4,10 +4,12 @@ public class Order {
 
     private double Price;
     private double Amount;
+    private double NoFeeAmount;
 
-    public Order(double price, double amount){
+    public Order(double price, double amount, double noFeeAmount){
         this.Amount = amount;
         this.Price = price;
+        this.NoFeeAmount = noFeeAmount;
     }
 
     public double getPrice() {
@@ -24,5 +26,9 @@ public class Order {
 
     public void setAmount(double amount) {
         Amount = amount;
+    }
+
+    public double getInitialAmount() {
+        return NoFeeAmount;
     }
 }
