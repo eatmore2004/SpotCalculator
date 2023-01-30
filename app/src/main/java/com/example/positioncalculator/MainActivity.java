@@ -1,8 +1,10 @@
 package com.example.positioncalculator;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -18,12 +20,13 @@ public class MainActivity extends AppCompatActivity {
     public Button sell_button;
     public Button clr_button;
     public Button back_button;
+    public Button journal_button;
     public EditText price_edit;
     public EditText amount_edit;
     public EditText fee_edit;
     public TextView message_box;
 
-    public Manager manager = new Manager();
+    public static Manager manager = new Manager();
 
 
     @SuppressLint("MissingInflatedId")
@@ -36,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
         this.sell_button = findViewById(R.id.sell_btn);
         this.clr_button = findViewById(R.id.clear_btn);
         this.back_button = findViewById(R.id.back_btn);
+        this.journal_button = findViewById(R.id.journal_btn);
 
         this.price_edit = findViewById(R.id.price_edt);
         this.amount_edit = findViewById(R.id.amount_edt);
@@ -81,7 +85,14 @@ public class MainActivity extends AppCompatActivity {
                 ClearEdits();
                 Order last_order = manager.stepBack();
                 price_edit.setText(String.format(Locale.US,"%.2f",last_order.getPrice()));
-                amount_edit.setText(String.format(Locale.US,"%.2f",last_order.getAmount()));
+                amount_edit.setText(String.format(Locale.US,"%.6f",last_order.getAmount()));
+            }
+        });
+        journal_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this,Logs.class);
+                startActivity(intent);
             }
         });
     }
@@ -94,6 +105,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private Order getOrder(){
+
         double price, amount, fee = 0;
         String price_text = price_edit.getText().toString();
         String amount_text = amount_edit.getText().toString();
@@ -115,4 +127,5 @@ public class MainActivity extends AppCompatActivity {
 
         return null;
     }
+
 }
