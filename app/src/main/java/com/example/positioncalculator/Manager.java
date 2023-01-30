@@ -6,8 +6,19 @@ import java.util.ArrayList;
 
 public class Manager {
 
-    public ArrayList<Order> buy_orders = new ArrayList<>();
-    public ArrayList<Order> sell_orders = new ArrayList<>();
+    private Direction lastOrder = Direction.BUY;
+    private final ArrayList<Order> buy_orders = new ArrayList<>();
+    private final ArrayList<Order> sell_orders = new ArrayList<>();
+
+    public void addBuy(Order order){
+        buy_orders.add(order);
+        lastOrder = Direction.BUY;
+    }
+
+    public void addSell(Order order){
+        sell_orders.add(order);
+        lastOrder = Direction.SELL;
+    }
 
     public void clear() {
         buy_orders.removeAll(buy_orders);
@@ -63,5 +74,20 @@ public class Manager {
         }
 
         return sum / div;
+    }
+
+
+    public Order stepBack() {
+        if (lastOrder == Direction.BUY){
+            return removeOrderFrom(buy_orders);
+        }else{
+            return removeOrderFrom(sell_orders);
+        }
+    }
+
+    private Order removeOrderFrom(ArrayList<Order> orders) {
+        Order order = orders.get(orders.size() - 1);
+        orders.remove(orders.size() - 1);
+        return order;
     }
 }

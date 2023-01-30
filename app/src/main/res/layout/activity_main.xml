@@ -100,9 +100,19 @@
         android:layout_width="143dp"
         android:layout_height="63dp"
         android:layout_marginEnd="32dp"
-        android:layout_marginBottom="24dp"
+        android:layout_marginBottom="20dp"
         android:text="Очистить"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/back_btn"
+        android:layout_width="143dp"
+        android:layout_height="63dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginBottom="20dp"
+        android:text="Шаг назад"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
