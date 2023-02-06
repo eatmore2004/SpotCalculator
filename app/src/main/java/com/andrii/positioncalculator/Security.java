@@ -1,4 +1,4 @@
-package com.example.positioncalculator;
+package com.andrii.positioncalculator;
 
 import android.annotation.SuppressLint;
 

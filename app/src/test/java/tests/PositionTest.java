@@ -1,7 +1,7 @@
 package tests;
 
-import com.example.positioncalculator.Order;
-import com.example.positioncalculator.Position;
+import com.andrii.positioncalculator.Order;
+import com.andrii.positioncalculator.Position;
 
 import org.junit.Assert;
 import org.junit.Test;

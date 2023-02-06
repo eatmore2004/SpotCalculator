@@ -1,4 +1,4 @@
-package com.example.positioncalculator;
+package com.andrii.positioncalculator;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
@@ -9,6 +9,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.positioncalculator.R;
 
 import java.util.Locale;
 

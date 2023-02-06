@@ -1,13 +1,10 @@
-package com.example.positioncalculator;
+package com.andrii.positioncalculator;
 
 import android.annotation.SuppressLint;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class Position {
 
