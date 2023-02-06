@@ -75,7 +75,7 @@ public class Position {
 
     @SuppressLint("DefaultLocale")
     public String getResponse() {
-
+        if (buy_orders.isEmpty() && sell_orders.isEmpty()) return "Введите значения";
         String message = "";
         double av_price_buy = getAveragePrice(buy_orders);
         double buyed_amount = getAmount(buy_orders);
@@ -150,10 +150,14 @@ public class Position {
         StringBuilder message = new StringBuilder();
 
         for (int i = 0; i < buy_orders.size(); i++) {
-            message.append("BUY: ").append(buy_orders.get(i).getAmount()).append(" BTC по ").append(buy_orders.get(i).getPrice()).append(" (fee ").append(buy_orders.get(i).getInitialAmount() - buy_orders.get(i).getAmount()).append("USDT)\n");
+            double price = buy_orders.get(i).getPrice();
+            double amount = buy_orders.get(i).getAmount();
+            message.append("BUY: ").append(price).append(" на ").append(amount).append("BTC (").append(price * amount).append("USDT)\n");
         }
         for (int i = 0; i < sell_orders.size(); i++) {
-            message.append("SELL: ").append(sell_orders.get(i).getAmount()).append(" BTC по ").append(sell_orders.get(i).getPrice()).append(" (fee ").append(sell_orders.get(i).getInitialAmount() - sell_orders.get(i).getAmount()).append("USDT)\n");
+            double price = sell_orders.get(i).getPrice();
+            double amount = sell_orders.get(i).getAmount();
+            message.append("SELL: ").append(price).append(" на ").append(amount).append("BTC (").append(price * amount).append("USDT)\n");
         }
         return message.toString();
     }
@@ -196,7 +200,6 @@ public class Position {
         for (int i = 0; i < s_orders.size(); i++) {
             if (!sell_orders.get(i).equals(s_orders.get(i))) return false;
         }
-
         return true;
     }
 }

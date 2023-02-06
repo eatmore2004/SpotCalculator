@@ -14,6 +14,8 @@ import com.example.positioncalculator.R;
 
 import java.util.Locale;
 
+import io.paperdb.Paper;
+
 public class MainActivity extends AppCompatActivity {
 
     public Button buy_button;
@@ -25,9 +27,10 @@ public class MainActivity extends AppCompatActivity {
     public EditText price_edit;
     public EditText amount_edit;
     public EditText fee_edit;
+    @SuppressLint("StaticFieldLeak")
     public static TextView message_box;
 
-    public static Position position = new Position();
+    public static Position position;
 
 
     @SuppressLint("MissingInflatedId")
@@ -35,6 +38,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Paper.init(getApplicationContext());
 
         this.buy_button = findViewById(R.id.buy_btn);
         this.sell_button = findViewById(R.id.sell_btn);
@@ -47,7 +52,8 @@ public class MainActivity extends AppCompatActivity {
         this.fee_edit = findViewById(R.id.fee_edt);
 
         message_box = findViewById(R.id.message);
-
+        position = StorageManager.getPosition("current_position");
+        message_box.setText(position.getResponse());
         buy_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -137,7 +143,11 @@ public class MainActivity extends AppCompatActivity {
 
         return null;
     }
-
+    @Override
+    protected void onPause() {
+        super.onPause();
+        StorageManager.savePosition("current_position",position);
+    }
 
 
 }

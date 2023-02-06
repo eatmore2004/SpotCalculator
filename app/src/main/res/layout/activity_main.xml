@@ -105,7 +105,7 @@
         android:layout_height="63dp"
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="20dp"
-        android:text="Очистить"
+        android:text="Сброс"
         app:cornerRadius="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
@@ -127,7 +127,7 @@
         android:layout_height="63dp"
         android:layout_marginStart="32dp"
         android:layout_marginBottom="20dp"
-        android:text="Шаг назад"
+        android:text="вернуть"
         app:cornerRadius="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -138,7 +138,7 @@
         android:layout_height="63dp"
         android:layout_marginStart="32dp"
         android:layout_marginBottom="24dp"
-        android:text="Журнал "
+        android:text="журнал"
         app:cornerRadius="10dp"
         app:layout_constraintBottom_toTopOf="@+id/back_btn"
         app:layout_constraintStart_toStartOf="parent" />

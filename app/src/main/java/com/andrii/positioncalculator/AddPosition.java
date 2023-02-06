@@ -23,7 +23,6 @@ public class AddPosition extends AppCompatActivity {
     public Button paste_button;
     public Button clear_button;
     public Button scan_button;
-
     public TextView hash_edit;
 
     @SuppressLint("MissingInflatedId")
