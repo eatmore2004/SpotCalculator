@@ -18,12 +18,13 @@
         android:layout_width="195dp"
         android:layout_height="47dp"
         android:layout_marginStart="50dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="224dp"
         android:layout_marginEnd="50dp"
         android:ems="10"
         android:hint="Цена"
         android:inputType="numberSigned|numberDecimal"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.508"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -79,21 +80,22 @@
         android:text="Продать"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.514"
+        app:layout_constraintHorizontal_bias="0.562"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/fee_edt"
-        app:layout_constraintVertical_bias="0.245" />
+        app:layout_constraintVertical_bias="0.309" />
 
     <TextView
         android:id="@+id/message"
         android:layout_width="357dp"
         android:layout_height="166dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginBottom="28dp"
         android:textAlignment="textStart"
         android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/price_edt"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sell_btn" />
+        app:layout_constraintHorizontal_bias="0.51"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/clear_btn"
@@ -103,6 +105,16 @@
         android:layout_marginBottom="20dp"
         android:text="Очистить"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/loadposition_btn"
+        android:layout_width="143dp"
+        android:layout_height="63dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="24dp"
+        android:text="загрузить"
+        app:layout_constraintBottom_toTopOf="@+id/clear_btn"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <Button
@@ -117,15 +129,12 @@
 
     <Button
         android:id="@+id/journal_btn"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="114dp"
-        android:layout_marginTop="28dp"
-        android:layout_marginEnd="115dp"
-        android:text="Журнал Позиции"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/message" />
+        android:layout_width="143dp"
+        android:layout_height="63dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginBottom="24dp"
+        android:text="Журнал "
+        app:layout_constraintBottom_toTopOf="@+id/back_btn"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -6,7 +6,6 @@ import android.annotation.SuppressLint;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -31,7 +30,7 @@ public class Logs extends AppCompatActivity {
         this.copy_button = findViewById(R.id.copy_btn);
         this.list_view = findViewById(R.id.list_edt);
 
-        list_view.setText(MainActivity.manager.toString());
+        list_view.setText(MainActivity.position.toString());
 
         back_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -42,8 +41,8 @@ public class Logs extends AppCompatActivity {
         copy_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String message = list_view.getText().toString();
-                if (!message.equals("Пока ничего!")) {
+                String message = MainActivity.position.getHash();
+                if (!message.equals("")) {
                     ClipboardManager clipboardManager = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
                     ClipData clipData = ClipData.newPlainText("LOGS",message);
                     clipboardManager.setPrimaryClip(clipData);

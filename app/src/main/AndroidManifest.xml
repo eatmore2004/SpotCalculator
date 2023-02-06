@@ -12,6 +12,9 @@
         android:theme="@style/Theme.PositionCalculator"
         tools:targetApi="31">
         <activity
+            android:name=".AddPosition"
+            android:exported="false" />
+        <activity
             android:name=".Logs"
             android:exported="false" />
         <activity

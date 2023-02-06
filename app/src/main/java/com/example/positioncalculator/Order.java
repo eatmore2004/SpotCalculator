@@ -1,10 +1,12 @@
 package com.example.positioncalculator;
 
+import androidx.annotation.Nullable;
+
 public class Order {
 
     private double Price;
     private double Amount;
-    private double NoFeeAmount;
+    private final double NoFeeAmount;
 
     public Order(double price, double amount, double noFeeAmount){
         this.Amount = amount;
@@ -30,5 +32,11 @@ public class Order {
 
     public double getInitialAmount() {
         return NoFeeAmount;
+    }
+    @Override
+    public boolean equals(@Nullable Object obj) {
+        if (obj != null && !(obj.getClass() == Order.class)) return false;
+        Order order = (Order) obj;
+        return (order != null && order.getAmount() == Amount && order.getPrice() == Price && order.getInitialAmount() == NoFeeAmount);
     }
 }

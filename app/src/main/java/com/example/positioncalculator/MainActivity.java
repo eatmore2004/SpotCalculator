@@ -1,6 +1,4 @@
 package com.example.positioncalculator;
-
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
@@ -21,12 +19,13 @@ public class MainActivity extends AppCompatActivity {
     public Button clr_button;
     public Button back_button;
     public Button journal_button;
+    public Button positionload_button;
     public EditText price_edit;
     public EditText amount_edit;
     public EditText fee_edit;
-    public TextView message_box;
+    public static TextView message_box;
 
-    public static Manager manager = new Manager();
+    public static Position position = new Position();
 
 
     @SuppressLint("MissingInflatedId")
@@ -40,21 +39,21 @@ public class MainActivity extends AppCompatActivity {
         this.clr_button = findViewById(R.id.clear_btn);
         this.back_button = findViewById(R.id.back_btn);
         this.journal_button = findViewById(R.id.journal_btn);
-
+        this.positionload_button = findViewById(R.id.loadposition_btn);
         this.price_edit = findViewById(R.id.price_edt);
         this.amount_edit = findViewById(R.id.amount_edt);
         this.fee_edit = findViewById(R.id.fee_edt);
 
-        this.message_box = findViewById(R.id.message);
+        message_box = findViewById(R.id.message);
 
         buy_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Order order = getOrder();
                 if (order != null){
-                    manager.addBuy(order);
+                    position.addBuy(order);
                     ClearEdits();
-                    message_box.setText(manager.getResponse());
+                    message_box.setText(position.getResponse());
                 }
             }
         });
@@ -64,9 +63,9 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Order order = getOrder();
                 if (order != null){
-                    manager.addSell(order);
+                    position.addSell(order);
                     ClearEdits();
-                    message_box.setText(manager.getResponse());
+                    message_box.setText(position.getResponse());
                 }
             }
         });
@@ -75,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 ClearEdits();
-                manager.clear();
+                position.clear();
             }
         });
 
@@ -83,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 ClearEdits();
-                Order last_order = manager.stepBack();
+                Order last_order = position.stepBack();
                 price_edit.setText(String.format(Locale.US,"%.2f",last_order.getPrice()));
                 amount_edit.setText(String.format(Locale.US,"%.6f",last_order.getAmount()));
             }
@@ -95,9 +94,18 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        positionload_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this,AddPosition.class);
+                startActivity(intent);
+            }
+        });
+
     }
 
-    private void ClearEdits() {
+    public void ClearEdits() {
         price_edit.setText("");
         amount_edit.setText("");
         fee_edit.setText("");
@@ -127,5 +135,7 @@ public class MainActivity extends AppCompatActivity {
 
         return null;
     }
+
+
 
 }
