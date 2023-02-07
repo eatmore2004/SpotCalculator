@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context="com.andrii.positioncalculator.MainActivity">
 
     <androidx.constraintlayout.widget.Barrier
         android:layout_width="wrap_content"
@@ -18,12 +18,13 @@
         android:layout_width="195dp"
         android:layout_height="47dp"
         android:layout_marginStart="50dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="224dp"
         android:layout_marginEnd="50dp"
         android:ems="10"
         android:hint="Цена"
         android:inputType="numberSigned|numberDecimal"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.508"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -64,6 +65,7 @@
         android:layout_marginBottom="4dp"
         android:backgroundTint="#4CAF50"
         android:text="Купить"
+        app:cornerRadius="60dp"
         app:layout_constraintBottom_toTopOf="@+id/sell_btn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.485"
@@ -75,34 +77,50 @@
         android:layout_height="70dp"
         android:layout_marginStart="100dp"
         android:layout_marginEnd="100dp"
-        android:backgroundTint="#E91E63"
+        android:backgroundTint="#F44336"
         android:text="Продать"
+        app:cornerRadius="60dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.514"
+        app:layout_constraintHorizontal_bias="0.562"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/fee_edt"
-        app:layout_constraintVertical_bias="0.245" />
+        app:layout_constraintVertical_bias="0.3" />
 
     <TextView
         android:id="@+id/message"
         android:layout_width="357dp"
         android:layout_height="166dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginBottom="28dp"
         android:textAlignment="textStart"
         android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/price_edt"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.592"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sell_btn" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
 
     <Button
-        android:id="@+id/clear_btn"
+        android:id="@+id/stats_btn"
         android:layout_width="143dp"
         android:layout_height="63dp"
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="20dp"
-        android:text="Очистить"
+        android:text="График"
+        app:cornerRadius="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/loadposition_btn"
+        android:layout_width="143dp"
+        android:layout_height="63dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="24dp"
+        android:text="загрузить"
+        app:cornerRadius="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/stats_btn"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <Button
@@ -111,21 +129,57 @@
         android:layout_height="63dp"
         android:layout_marginStart="32dp"
         android:layout_marginBottom="20dp"
-        android:text="Шаг назад"
+        android:text="вернуть"
+        app:cornerRadius="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/journal_btn"
-        android:layout_width="0dp"
+        android:layout_width="143dp"
+        android:layout_height="63dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginBottom="24dp"
+        android:text="журнал"
+        app:cornerRadius="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/back_btn"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/clear_btn"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="114dp"
-        android:layout_marginTop="28dp"
-        android:layout_marginEnd="115dp"
-        android:text="Журнал Позиции"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/message" />
+        android:layout_marginStart="220dp"
+        android:layout_marginBottom="48dp"
+        android:src="@drawable/delete"
+        app:layout_constraintBottom_toBottomOf="@+id/sell_btn"
+        app:layout_constraintStart_toStartOf="@+id/sell_btn" />
+
+    <ImageView
+        android:id="@+id/clr_price_btn"
+        android:layout_width="42dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="16dp"
+        android:src="@drawable/remove"
+        app:layout_constraintStart_toEndOf="@+id/price_edt"
+        app:layout_constraintTop_toTopOf="@+id/price_edt" />
+
+    <ImageView
+        android:id="@+id/clr_amount_btn"
+        android:layout_width="42dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="16dp"
+        android:src="@drawable/remove"
+        app:layout_constraintStart_toEndOf="@+id/amount_edt"
+        app:layout_constraintTop_toTopOf="@+id/amount_edt" />
+
+    <ImageView
+        android:id="@+id/clr_fee_btn"
+        android:layout_width="42dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="16dp"
+        android:src="@drawable/remove"
+        app:layout_constraintStart_toEndOf="@+id/fee_edt"
+        app:layout_constraintTop_toTopOf="@+id/fee_edt" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

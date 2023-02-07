@@ -1,6 +1,4 @@
-package com.example.positioncalculator;
-
-import androidx.annotation.NonNull;
+package com.andrii.positioncalculator;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
@@ -9,24 +7,38 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.positioncalculator.R;
+
 import java.util.Locale;
+
+import io.paperdb.Paper;
 
 public class MainActivity extends AppCompatActivity {
 
     public Button buy_button;
     public Button sell_button;
-    public Button clr_button;
+    public Button stats_button;
     public Button back_button;
     public Button journal_button;
+    public Button positionload_button;
+
+    public ImageView clr_button;
+    public ImageView clr_price_button;
+    public ImageView clr_amount_button;
+    public ImageView clr_fee_button;
+
     public EditText price_edit;
     public EditText amount_edit;
     public EditText fee_edit;
-    public TextView message_box;
+    @SuppressLint("StaticFieldLeak")
+    public static TextView message_box;
 
-    public static Manager manager = new Manager();
+    public static Position position;
 
 
     @SuppressLint("MissingInflatedId")
@@ -35,26 +47,34 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Paper.init(getApplicationContext());
+
         this.buy_button = findViewById(R.id.buy_btn);
         this.sell_button = findViewById(R.id.sell_btn);
-        this.clr_button = findViewById(R.id.clear_btn);
+        this.stats_button = findViewById(R.id.stats_btn);
         this.back_button = findViewById(R.id.back_btn);
         this.journal_button = findViewById(R.id.journal_btn);
-
+        this.positionload_button = findViewById(R.id.loadposition_btn);
         this.price_edit = findViewById(R.id.price_edt);
         this.amount_edit = findViewById(R.id.amount_edt);
         this.fee_edit = findViewById(R.id.fee_edt);
+        this.clr_button = findViewById(R.id.clear_btn);
+        this.clr_price_button = findViewById(R.id.clr_price_btn);
+        this.clr_amount_button = findViewById(R.id.clr_amount_btn);
+        this.clr_fee_button = findViewById(R.id.clr_fee_btn);
 
-        this.message_box = findViewById(R.id.message);
 
+        message_box = findViewById(R.id.message);
+        position = StorageManager.getPosition("current_position");
+        message_box.setText(position.getResponse());
         buy_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Order order = getOrder();
                 if (order != null){
-                    manager.addBuy(order);
+                    position.addBuy(order);
                     ClearEdits();
-                    message_box.setText(manager.getResponse());
+                    message_box.setText(position.getResponse());
                 }
             }
         });
@@ -64,9 +84,9 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Order order = getOrder();
                 if (order != null){
-                    manager.addSell(order);
+                    position.addSell(order);
                     ClearEdits();
-                    message_box.setText(manager.getResponse());
+                    message_box.setText(position.getResponse());
                 }
             }
         });
@@ -75,7 +95,25 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 ClearEdits();
-                manager.clear();
+                position.clear();
+            }
+        });
+        clr_price_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                price_edit.setText("");
+            }
+        });
+        clr_amount_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                amount_edit.setText("");
+            }
+        });
+        clr_fee_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                fee_edit.setText("");
             }
         });
 
@@ -83,7 +121,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 ClearEdits();
-                Order last_order = manager.stepBack();
+                Order last_order = position.stepBack();
                 price_edit.setText(String.format(Locale.US,"%.2f",last_order.getPrice()));
                 amount_edit.setText(String.format(Locale.US,"%.6f",last_order.getAmount()));
             }
@@ -95,9 +133,29 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        positionload_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this,AddPosition.class);
+                startActivity(intent);
+            }
+        });
+        stats_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (!position.getBuy_orders().isEmpty()){
+                    Intent intent = new Intent(MainActivity.this,ChartAct.class);
+                    startActivity(intent);
+                }else{
+                    Toast.makeText(getApplicationContext(),"Совершите хотя бы одну покупку", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
     }
 
-    private void ClearEdits() {
+    public void ClearEdits() {
         price_edit.setText("");
         amount_edit.setText("");
         fee_edit.setText("");
@@ -105,7 +163,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private Order getOrder(){
-
         double price, amount, fee = 0;
         String price_text = price_edit.getText().toString();
         String amount_text = amount_edit.getText().toString();
@@ -120,12 +177,17 @@ public class MainActivity extends AppCompatActivity {
             }catch (Exception e1){
                 Toast.makeText(getApplicationContext(),"Некоректные данные!", Toast.LENGTH_LONG).show();
             }
-
         }else{
             Toast.makeText(getApplicationContext(),"Введите все данные!", Toast.LENGTH_SHORT).show();
         }
 
         return null;
     }
+    @Override
+    protected void onPause() {
+        super.onPause();
+        StorageManager.savePosition("current_position",position);
+    }
+
 
 }
