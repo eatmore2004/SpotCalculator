@@ -50,6 +50,7 @@ public class AddPosition extends AppCompatActivity {
             public void onClick(View view) {
                 ClipboardManager clipboard = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
                 hash_edit.setText(clipboard.getText());
+                Analyze(hash_edit.getText().toString());
             }
         });
         load_button.setOnClickListener(new View.OnClickListener() {

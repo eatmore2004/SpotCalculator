@@ -33,6 +33,10 @@ public class Order {
     public double getInitialAmount() {
         return NoFeeAmount;
     }
+
+    public int getPriceInt(){
+        return (int) Math.round(Price / 100) * 100;
+    }
     @Override
     public boolean equals(@Nullable Object obj) {
         if (obj != null && !(obj.getClass() == Order.class)) return false;

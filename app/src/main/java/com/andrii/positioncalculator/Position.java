@@ -71,6 +71,7 @@ public class Position {
     public void clear() {
         buy_orders.removeAll(buy_orders);
         sell_orders.removeAll(sell_orders);
+        direction = Direction.NONE;
     }
 
     @SuppressLint("DefaultLocale")
@@ -152,18 +153,18 @@ public class Position {
         for (int i = 0; i < buy_orders.size(); i++) {
             double price = buy_orders.get(i).getPrice();
             double amount = buy_orders.get(i).getAmount();
-            message.append("BUY: ").append(price).append(" на ").append(amount).append("BTC (").append(price * amount).append("USDT)\n");
+            message.append("BUY: ").append(price).append(" на ").append(amount).append("BTC (≈").append(Math.round(price * amount)).append("USDT)\n");
         }
         for (int i = 0; i < sell_orders.size(); i++) {
             double price = sell_orders.get(i).getPrice();
             double amount = sell_orders.get(i).getAmount();
-            message.append("SELL: ").append(price).append(" на ").append(amount).append("BTC (").append(price * amount).append("USDT)\n");
+            message.append("SELL: ").append(price).append(" на ").append(amount).append("BTC (≈").append(Math.round(price * amount)).append("USDT)\n");
         }
         return message.toString();
     }
 
     public String getHash(){
-        StringBuilder hash = new StringBuilder("");
+        StringBuilder hash = new StringBuilder();
 
         if (buy_orders.isEmpty() && sell_orders.isEmpty()) return "";
 

@@ -32,4 +32,9 @@ public class OrderTest {
 
         Assert.assertFalse(order1.equals(order2));
     }
+    @Test
+    public void TestGetInt(){
+        Order order = new Order(1685,0.020,0.10);
+        Assert.assertEquals(1700,order.getPriceInt());
+    }
 }

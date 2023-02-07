@@ -27,4 +27,7 @@ public class PositionTest {
         position.addSell(new Order(22330.56,0.022,0.022));
         return position;
     }
+
+
+
 }

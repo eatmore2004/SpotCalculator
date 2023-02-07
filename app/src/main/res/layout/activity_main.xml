@@ -85,7 +85,7 @@
         app:layout_constraintHorizontal_bias="0.562"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/fee_edt"
-        app:layout_constraintVertical_bias="0.309" />
+        app:layout_constraintVertical_bias="0.3" />
 
     <TextView
         android:id="@+id/message"
@@ -96,16 +96,18 @@
         android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@+id/price_edt"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.51"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.592"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
 
     <Button
-        android:id="@+id/clear_btn"
+        android:id="@+id/stats_btn"
         android:layout_width="143dp"
         android:layout_height="63dp"
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="20dp"
-        android:text="Сброс"
+        android:text="График"
         app:cornerRadius="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
@@ -118,7 +120,7 @@
         android:layout_marginBottom="24dp"
         android:text="загрузить"
         app:cornerRadius="10dp"
-        app:layout_constraintBottom_toTopOf="@+id/clear_btn"
+        app:layout_constraintBottom_toTopOf="@+id/stats_btn"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <Button
@@ -142,5 +144,42 @@
         app:cornerRadius="10dp"
         app:layout_constraintBottom_toTopOf="@+id/back_btn"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/clear_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="220dp"
+        android:layout_marginBottom="48dp"
+        android:src="@drawable/delete"
+        app:layout_constraintBottom_toBottomOf="@+id/sell_btn"
+        app:layout_constraintStart_toStartOf="@+id/sell_btn" />
+
+    <ImageView
+        android:id="@+id/clr_price_btn"
+        android:layout_width="42dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="16dp"
+        android:src="@drawable/remove"
+        app:layout_constraintStart_toEndOf="@+id/price_edt"
+        app:layout_constraintTop_toTopOf="@+id/price_edt" />
+
+    <ImageView
+        android:id="@+id/clr_amount_btn"
+        android:layout_width="42dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="16dp"
+        android:src="@drawable/remove"
+        app:layout_constraintStart_toEndOf="@+id/amount_edt"
+        app:layout_constraintTop_toTopOf="@+id/amount_edt" />
+
+    <ImageView
+        android:id="@+id/clr_fee_btn"
+        android:layout_width="42dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="16dp"
+        android:src="@drawable/remove"
+        app:layout_constraintStart_toEndOf="@+id/fee_edt"
+        app:layout_constraintTop_toTopOf="@+id/fee_edt" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
