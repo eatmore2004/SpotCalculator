@@ -21,6 +21,11 @@
         android:layout_marginTop="224dp"
         android:layout_marginEnd="50dp"
         android:ems="10"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        android:drawableStart="@drawable/baseline_attach_money_24"
+        android:drawablePadding="6dp"
+        android:background="@drawable/edit_style"
         android:hint="Цена"
         android:inputType="numberSigned|numberDecimal"
         app:layout_constraintEnd_toEndOf="parent"
@@ -36,6 +41,11 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="50dp"
         android:ems="10"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        android:drawableStart="@drawable/baseline_local_atm_24"
+        android:drawablePadding="6dp"
+        android:background="@drawable/edit_style"
         android:hint="Количество"
         android:inputType="numberSigned|numberDecimal"
         app:layout_constraintEnd_toEndOf="parent"
@@ -50,7 +60,12 @@
         android:layout_marginTop="64dp"
         android:layout_marginEnd="50dp"
         android:ems="10"
-        android:hint="Fee (Опционально)"
+        android:hint="Комиссия"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        android:drawableStart="@drawable/baseline_percent_24"
+        android:drawablePadding="6dp"
+        android:background="@drawable/edit_style"
         android:inputType="numberSigned|numberDecimal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -63,12 +78,14 @@
         android:layout_marginStart="100dp"
         android:layout_marginEnd="100dp"
         android:layout_marginBottom="4dp"
-        android:backgroundTint="#4CAF50"
+        android:backgroundTint="#56B54E"
         android:text="Купить"
-        app:cornerRadius="60dp"
         app:layout_constraintBottom_toTopOf="@+id/sell_btn"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:cornerRadius="60dp"
+        app:strokeColor="@color/buttons"
+        app:strokeWidth="7dp" />
 
     <Button
         android:id="@+id/sell_btn"
@@ -76,15 +93,16 @@
         android:layout_height="70dp"
         android:layout_marginStart="100dp"
         android:layout_marginEnd="100dp"
-        android:backgroundTint="#F44336"
+        android:backgroundTint="#D9337F"
         android:text="Продать"
         app:cornerRadius="60dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.51"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/fee_edt"
-        app:layout_constraintVertical_bias="0.3" />
+        app:layout_constraintVertical_bias="0.3"
+        app:strokeColor="@color/buttons"
+        app:strokeWidth="7dp" />
 
     <TextView
         android:id="@+id/message"
@@ -94,89 +112,98 @@
         android:textAlignment="textStart"
         android:textSize="16sp"
         android:textStyle="bold"
+        android:background="@drawable/messagebox"
         app:layout_constraintBottom_toTopOf="@+id/price_edt"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="1.0"
+        android:fontFamily="@font/medium"/>
 
-    <Button
-        android:id="@+id/stats_btn"
-        android:layout_width="143dp"
-        android:layout_height="63dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="20dp"
-        android:text="График"
-        app:cornerRadius="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <Button
+    <ImageView
         android:id="@+id/loadposition_btn"
-        android:layout_width="143dp"
-        android:layout_height="63dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="24dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginEnd="88dp"
+        android:layout_marginBottom="32dp"
         android:text="загрузить"
         app:cornerRadius="10dp"
         app:layout_constraintBottom_toTopOf="@+id/stats_btn"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/add" />
 
-    <Button
+    <ImageView
+        android:id="@+id/journal_btn"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="88dp"
+        android:layout_marginBottom="32dp"
+        android:text="журнал"
+        app:cornerRadius="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/back_btn"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/jounal" />
+
+    <ImageView
         android:id="@+id/back_btn"
-        android:layout_width="143dp"
-        android:layout_height="63dp"
-        android:layout_marginStart="32dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="88dp"
         android:layout_marginBottom="20dp"
         android:text="вернуть"
         app:cornerRadius="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/back" />
 
-    <Button
-        android:id="@+id/journal_btn"
-        android:layout_width="143dp"
-        android:layout_height="63dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginBottom="24dp"
-        android:text="журнал"
+    <ImageView
+        android:id="@+id/stats_btn"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginEnd="88dp"
+        android:layout_marginBottom="20dp"
+        android:text="График"
         app:cornerRadius="10dp"
-        app:layout_constraintBottom_toTopOf="@+id/back_btn"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/chart" />
 
     <ImageView
         android:id="@+id/clear_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="220dp"
-        android:layout_marginBottom="48dp"
-        android:src="@drawable/delete"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="212dp"
+        android:layout_marginBottom="44dp"
         app:layout_constraintBottom_toBottomOf="@+id/sell_btn"
-        app:layout_constraintStart_toStartOf="@+id/sell_btn" />
-
-    <ImageView
-        android:id="@+id/clr_price_btn"
-        android:layout_width="42dp"
-        android:layout_height="45dp"
-        android:layout_marginStart="16dp"
-        android:src="@drawable/remove"
-        app:layout_constraintStart_toEndOf="@+id/price_edt"
-        app:layout_constraintTop_toTopOf="@+id/price_edt" />
+        app:layout_constraintStart_toStartOf="@+id/sell_btn"
+        app:srcCompat="@drawable/delete" />
 
     <ImageView
         android:id="@+id/clr_amount_btn"
-        android:layout_width="42dp"
-        android:layout_height="45dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
         android:src="@drawable/remove"
         app:layout_constraintStart_toEndOf="@+id/amount_edt"
         app:layout_constraintTop_toTopOf="@+id/amount_edt" />
 
     <ImageView
-        android:id="@+id/clr_fee_btn"
-        android:layout_width="42dp"
-        android:layout_height="45dp"
+        android:id="@+id/clr_price_btn"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:src="@drawable/remove"
+        app:layout_constraintStart_toEndOf="@+id/price_edt"
+        app:layout_constraintTop_toTopOf="@+id/price_edt" />
+
+    <ImageView
+        android:id="@+id/clr_fee_btn"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
         android:src="@drawable/remove"
         app:layout_constraintStart_toEndOf="@+id/fee_edt"
         app:layout_constraintTop_toTopOf="@+id/fee_edt" />

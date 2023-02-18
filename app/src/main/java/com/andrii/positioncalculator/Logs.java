@@ -21,11 +21,13 @@ import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 import com.journeyapps.barcodescanner.BarcodeEncoder;
 
+import java.util.Objects;
+
 public class Logs extends AppCompatActivity {
 
-    public Button back_button;
-    public Button copy_button;
-    public Button scan_button;
+    public ImageView back_button;
+    public ImageView copy_button;
+    public ImageView scan_button;
 
     public ImageView qr;
 
@@ -39,7 +41,6 @@ public class Logs extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_logs);
-
         this.back_button = findViewById(R.id.bck_btn);
         this.copy_button = findViewById(R.id.copy_btn);
         this.list_view = findViewById(R.id.list_edt);

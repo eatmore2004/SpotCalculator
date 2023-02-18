@@ -7,44 +7,32 @@
     android:background="#FFFFFF"
     tools:context="com.andrii.positioncalculator.AddPosition">
 
-    <Button
+    <ImageView
         android:id="@+id/load_btn"
-        android:layout_width="195dp"
-        android:layout_height="70dp"
-        android:layout_marginStart="100dp"
-        android:layout_marginTop="64dp"
-        android:layout_marginEnd="100dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="4dp"
         android:backgroundTint="#4CAF50"
         android:text="Загрузить"
         app:cornerRadius="60dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.523"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/scan_btn" />
-
-    <Button
-        android:id="@+id/clear2_btn"
-        android:layout_width="195dp"
-        android:layout_height="70dp"
-        android:layout_marginStart="100dp"
-        android:layout_marginTop="148dp"
-        android:layout_marginEnd="100dp"
-        android:backgroundTint="#9C27B0"
-        android:text="Очистить"
-        app:cornerRadius="60dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.523"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/scan_btn" />
+        app:layout_constraintStart_toEndOf="@+id/hash_edt"
+        app:layout_constraintTop_toTopOf="@+id/hash_edt"
+        app:srcCompat="@drawable/next" />
 
     <EditText
         android:id="@+id/hash_edt"
-        android:layout_width="240dp"
-        android:layout_height="0dp"
+        android:layout_width="245dp"
+        android:layout_height="48dp"
         android:layout_marginTop="32dp"
+        android:background="@drawable/edit_style"
+        android:drawableStart="@drawable/baseline_security_24"
+        android:drawablePadding="6dp"
         android:ems="10"
-        android:hint="Вписать сюда"
+        android:hint="Вписать ключ сюда"
         android:inputType="textNoSuggestions"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
@@ -52,39 +40,35 @@
 
     <Button
         android:id="@+id/scan_btn"
-        android:layout_width="242dp"
-        android:layout_height="62dp"
-        android:layout_marginTop="116dp"
+        android:layout_width="245dp"
+        android:layout_height="71dp"
+        android:layout_marginTop="28dp"
+        android:backgroundTint="#fff"
+        android:fontFamily="@font/medium"
         android:text="отсканировать QR код"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/hash_edt" />
-
-    <Button
-        android:id="@+id/paste_btn"
-        android:layout_width="242dp"
-        android:layout_height="62dp"
-        android:layout_marginTop="24dp"
-        android:text="Вставить из буфера обмена"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/hash_edt" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="или"
-        android:textAlignment="center"
-        android:textAllCaps="false"
-        android:textStyle="italic"
-        app:layout_constraintBottom_toTopOf="@+id/scan_btn"
+        android:textColor="@color/black"
+        app:cornerRadius="60dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/paste_btn"
-        app:layout_constraintVertical_bias="0.47000003" />
+        app:strokeColor="@color/buttons"
+        app:strokeWidth="7dp" />
+
+    <Button
+        android:id="@+id/paste_btn"
+        android:layout_width="245dp"
+        android:layout_height="71dp"
+        android:layout_marginTop="40dp"
+        android:backgroundTint="#fff"
+        android:fontFamily="@font/medium"
+        android:text="Вставить из clipboard"
+        android:textColor="@color/black"
+        app:cornerRadius="60dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/hash_edt"
+        app:strokeColor="@color/buttons"
+        app:strokeWidth="7dp" />
 
     <TextView
         android:id="@+id/textView3"
@@ -92,6 +76,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
         android:text="Вставьте ключ позиции"
+        android:fontFamily="@font/medium"
         android:textAlignment="center"
         android:textAllCaps="false"
         android:textColor="#673AB7"
@@ -108,19 +93,29 @@
         android:layout_height="61dp"
         android:layout_marginBottom="52dp"
         android:text="Назад"
+        android:fontFamily="@font/medium"
+        android:textColor="@color/black"
+        app:cornerRadius="60dp"
+        android:backgroundTint="#fff"
+        app:iconTint="#EDE2E2"
+        app:strokeColor="@color/buttons"
+        app:strokeWidth="7dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.501"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        />
 
     <TextView
         android:id="@+id/textView4"
-        android:layout_width="277dp"
-        android:layout_height="104dp"
+        android:layout_width="336dp"
+        android:layout_height="121dp"
         android:layout_marginTop="28dp"
-        android:text="Внимание! Предыдущая позиция и все результаты подсчетов будут безвозвратно стерты после загрузки новой позиции. Скопируйте ее ключ перед загрузкой нового "
+        android:background="@drawable/messagebox"
+        android:fontFamily="@font/medium"
         android:textAlignment="center"
         android:textColor="#D32121"
+        android:text="\n Внимание! Предыдущая позиция и все результаты подсчетов будут безвозвратно стерты после загрузки новой позиции. Скопируйте ее ключ перед загрузкой нового "
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView3" />

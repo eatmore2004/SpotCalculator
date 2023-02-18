@@ -77,13 +77,15 @@ public class Position {
     public void clear() {
         buy_orders.removeAll(buy_orders);
         sell_orders.removeAll(sell_orders);
+        journal.removeAll(journal);
         direction = Direction.NONE;
     }
 
     @SuppressLint("DefaultLocale")
     public String getResponse() {
-        if (buy_orders.isEmpty() && sell_orders.isEmpty()) return "Введите значения";
-        String message = "";
+
+        if (buy_orders.isEmpty() && sell_orders.isEmpty()) return "\n\t\tВведите значения";
+        String message = "\n";
         double av_price_buy = getAveragePrice(buy_orders);
         double buyed_amount = getAmount(buy_orders);
 
@@ -95,16 +97,16 @@ public class Position {
 
             if (sold_amount > buyed_amount) sold_amount = buyed_amount;
 
-            if (profit >= 0) message += "Профит: " + String.format("%.5f",profit) + " USDT\n";
-            else message += "Убыток: " + String.format("%.5f",profit) + " USDT\n";
+            if (profit >= 0) message += "\t\tПрофит: " + String.format("%.5f",profit) + " USDT\n";
+            else message += "\t\tУбыток: " + String.format("%.5f",profit) + " USDT\n";
 
-            if ((buyed_amount - sold_amount) != 0) message += "Осталось в позиции: " + String.format("%.5f",(buyed_amount - sold_amount)) + " BTC\n";
+            if ((buyed_amount - sold_amount) != 0) message += "\t\tОсталось в позиции: " + String.format("%.5f",(buyed_amount - sold_amount)) + " BTC\n";
 
-            message += "Средняя цена продажи: "  + String.format("%.2f",av_price_sell) + "\n";
+            message += "\t\tСредняя цена продажи: "  + String.format("%.2f",av_price_sell) + "\n";
 
         }else {
-            message = "Средняя цена покупки: " + String.format("%.2f",av_price_buy) + "\n" +
-            "Всего куплено: " + buyed_amount + " BTC";
+            message = "\n\t\tСредняя цена покупки: " + String.format("%.2f",av_price_buy) + "\n" +
+            "\t\tВсего куплено: " + buyed_amount + " BTC";
         }
 
         return message;

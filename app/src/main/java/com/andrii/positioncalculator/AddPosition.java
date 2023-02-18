@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.os.Vibrator;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,9 +20,8 @@ import com.journeyapps.barcodescanner.ScanOptions;
 public class AddPosition extends AppCompatActivity {
     private Vibrator vibrator;
     public Button return_button;
-    public Button load_button;
+    public ImageView load_button;
     public Button paste_button;
-    public Button clear_button;
     public Button scan_button;
     public TextView hash_edit;
 
@@ -32,7 +32,6 @@ public class AddPosition extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_position);
         vibrator = (Vibrator)getSystemService(VIBRATOR_SERVICE);
-        clear_button = findViewById(R.id.clear2_btn);
         return_button = findViewById(R.id.return_btn);
         load_button = findViewById(R.id.load_btn);
         paste_button = findViewById(R.id.paste_btn);
@@ -57,12 +56,6 @@ public class AddPosition extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Analyze(hash_edit.getText().toString());
-            }
-        });
-        clear_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                hash_edit.setText("");
             }
         });
         scan_button.setOnClickListener(new View.OnClickListener() {

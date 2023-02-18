@@ -22,10 +22,10 @@ public class MainActivity extends AppCompatActivity {
 
     public Button buy_button;
     public Button sell_button;
-    public Button stats_button;
-    public Button back_button;
-    public Button journal_button;
-    public Button positionload_button;
+    public ImageView stats_button;
+    public ImageView back_button;
+    public ImageView journal_button;
+    public ImageView positionload_button;
 
     public ImageView clr_button;
     public ImageView clr_price_button;
