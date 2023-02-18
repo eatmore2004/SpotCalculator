@@ -19,18 +19,6 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/copy_btn2"
-        android:layout_width="200dp"
-        android:layout_height="55dp"
-        android:layout_marginBottom="16dp"
-        android:text="копировать"
-        app:cornerRadius="60dp"
-        app:layout_constraintBottom_toTopOf="@+id/bck_btn"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
         android:id="@+id/showqr_btn"
         android:layout_width="200dp"
         android:layout_height="55dp"
@@ -54,9 +42,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/list_edt"
+    <ScrollView
         android:layout_width="327dp"
         android:layout_height="513dp"
         android:textAlignment="viewStart"
@@ -66,8 +52,22 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="Пока ничего!" />
+        app:layout_constraintTop_toTopOf="parent">
+        <TextView
+            android:id="@+id/list_edt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="viewStart"
+            android:textColor="#000000"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/showqr_btn"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.494"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Пока ничего!" />
+    </ScrollView>
+
 
     <ImageView
         android:id="@+id/qrcode"

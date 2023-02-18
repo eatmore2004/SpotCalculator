@@ -9,6 +9,8 @@ import java.util.ArrayList;
 public class Position {
 
     public Direction direction = Direction.BUY;
+
+    private final ArrayList<Order> journal = new ArrayList<>();
     private final ArrayList<Order> buy_orders = new ArrayList<>();
     private final ArrayList<Order> sell_orders = new ArrayList<>();
 
@@ -59,11 +61,15 @@ public class Position {
     }
 
     public void addBuy(Order order){
+        order.setDirection(Direction.BUY);
+        journal.add(order);
         buy_orders.add(order);
         direction = Direction.BUY;
     }
 
     public void addSell(Order order){
+        order.setDirection(Direction.SELL);
+        journal.add(order);
         sell_orders.add(order);
         direction = Direction.SELL;
     }
@@ -81,7 +87,7 @@ public class Position {
         double av_price_buy = getAveragePrice(buy_orders);
         double buyed_amount = getAmount(buy_orders);
 
-        if (sell_orders.size() > 0){
+        if (sell_orders.size() > 0 && buy_orders.size() > 0){
 
             double sold_amount = getAmount(sell_orders);
             double av_price_sell = getAveragePrice(sell_orders);
@@ -121,7 +127,9 @@ public class Position {
             sum += orders.get(i).getPrice() * orders.get(i).getAmount();
             div += orders.get(i).getAmount();
         }
-
+        if (sum == 0 || div == 0){
+            return 0;
+        }
         return sum / div;
     }
 
@@ -143,22 +151,37 @@ public class Position {
         return order;
     }
 
+    @SuppressLint("DefaultLocale")
     @NonNull
     @Override
     public String toString() {
         if (buy_orders.isEmpty() && sell_orders.isEmpty()) return "Пока ничего!";
 
         StringBuilder message = new StringBuilder();
-
-        for (int i = 0; i < buy_orders.size(); i++) {
-            double price = buy_orders.get(i).getPrice();
-            double amount = buy_orders.get(i).getAmount();
-            message.append("BUY: ").append(price).append(" на ").append(amount).append("BTC (≈").append(Math.round(price * amount)).append("USDT)\n");
-        }
-        for (int i = 0; i < sell_orders.size(); i++) {
-            double price = sell_orders.get(i).getPrice();
-            double amount = sell_orders.get(i).getAmount();
-            message.append("SELL: ").append(price).append(" на ").append(amount).append("BTC (≈").append(Math.round(price * amount)).append("USDT)\n");
+        message.append(">>>>>> Итоги >>>>>>\n\n");
+        message.append("\tВсего куплено : ").append(getAmount(buy_orders)).append(" BTC\n");
+        message.append("\tВсего продано : ").append(getAmount(sell_orders)).append(" BTC\n");
+        message.append("\tОстаеться в позиции : ").append(String.format("%.5f",getAmount(buy_orders) - getAmount(sell_orders))).append(" BTC\n");
+        double av_buy = getAveragePrice(buy_orders);
+        double av_sell = getAveragePrice(sell_orders);
+        message.append("\tСредняя цена покупки: ").append((av_buy <= 0) ? "НЕИЗВЕСТНО" : String.format("%.2f",av_buy)).append(" USDT\n");
+        message.append("\tСредняя цена продажи: ").append((av_sell <= 0) ? "НЕИЗВЕСТНО" : String.format("%.2f",av_sell)).append(" USDT\n");
+        message.append("\tПрофит: ");
+        if (sell_orders.size() > 0 && buy_orders.size() > 0){
+            message.append(String.format("%.3f",getProfit(getAmount(sell_orders),av_sell,av_buy))).append(" USDT \n");
+        }else message.append("НЕИЗВЕСТНО USDT \n");
+        message.append("\n>>>>>> История торгов >>>>>>\n\n");
+        for (int i = 0; i < journal.size(); i++) {
+            Order order = journal.get(i);
+            double price = order.getPrice();
+            double amount = order.getAmount();
+            String direction = "";
+            switch(order.getDirection()){
+                case BUY : direction = "BUY"; break;
+                case SELL : direction = "SELL"; break;
+            }
+            if (direction.isEmpty()) return "ERROR";
+            message.append("\t").append(direction).append(" : ").append(price).append(" на ").append(amount).append("BTC (≈").append(Math.round(price * amount)).append(" USDT)\n");
         }
         return message.toString();
     }

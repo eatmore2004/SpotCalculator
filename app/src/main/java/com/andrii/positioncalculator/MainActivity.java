@@ -95,6 +95,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 ClearEdits();
+                message_box.setText("");
                 position.clear();
             }
         });
@@ -159,7 +160,6 @@ public class MainActivity extends AppCompatActivity {
         price_edit.setText("");
         amount_edit.setText("");
         fee_edit.setText("");
-        message_box.setText("");
     }
 
     private Order getOrder(){
@@ -173,7 +173,8 @@ public class MainActivity extends AppCompatActivity {
                 price = Double.parseDouble(price_text);
                 amount = Double.parseDouble(amount_text);
                 if (!fee_text.isEmpty()) fee = Double.parseDouble(fee_text);
-                return new Order(price,amount * (1 - 0.01 * fee),amount);
+                if (price > 0 && amount > 0) return new Order(price,amount * (1 - 0.01 * fee),amount);
+                else Toast.makeText(getApplicationContext(),"Не может = 0!", Toast.LENGTH_LONG).show();
             }catch (Exception e1){
                 Toast.makeText(getApplicationContext(),"Некоректные данные!", Toast.LENGTH_LONG).show();
             }
