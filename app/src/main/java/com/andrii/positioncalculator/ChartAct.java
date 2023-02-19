@@ -1,5 +1,6 @@
 package com.andrii.positioncalculator;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
@@ -73,7 +74,7 @@ public class ChartAct extends AppCompatActivity {
         for (int color: ColorTemplate.VORDIPLOM_COLORS) {
             colors.add(color);
         }
-        PieDataSet dataSet = new PieDataSet(entries, "Структура позиции");
+        PieDataSet dataSet = new PieDataSet(entries, "Структура покупок");
         dataSet.setColors(colors);
 
         PieData data = new PieData(dataSet);
@@ -85,8 +86,9 @@ public class ChartAct extends AppCompatActivity {
         pieChart.setData(data);
         pieChart.invalidate();
 
-        pieChart.animateY(1400, Easing.EaseInOutQuad);
+        pieChart.animateY(1000, Easing.EaseInOutQuad);
     }
+    @NonNull
     private ArrayList<PieEntry> getData(){
         ArrayList<PieEntry> entries = new ArrayList<>();
         ArrayList<Order> orders = Utils.getStats(MainActivity.position);

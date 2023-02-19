@@ -8,10 +8,20 @@ public class Order {
     private double Amount;
     private final double NoFeeAmount;
 
+    private Direction direction;
+
     public Order(double price, double amount, double noFeeAmount){
         this.Amount = amount;
         this.Price = price;
         this.NoFeeAmount = noFeeAmount;
+    }
+
+    public Direction getDirection() {
+        return direction;
+    }
+
+    public void setDirection(Direction direction) {
+        this.direction = direction;
     }
 
     public double getPrice() {

@@ -29,5 +29,19 @@ public class Utils {
         }
         return -1;
     }
+    public static String getEmoji(Emoji emoji){
+        int unicode = 0x1F626;
+        switch (emoji){
+            case SMILE:
+                unicode = 0x1F600; break;
+            case THINKING:
+                unicode = 0x1F914; break;
+            case WINKING:
+                unicode = 0x1F609; break;
+            case COOL:
+                unicode = 0x1F60E; break;
+        }
+        return new String(Character.toChars(unicode));
+    }
 
 }

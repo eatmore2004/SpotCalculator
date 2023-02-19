@@ -6,10 +6,10 @@ import android.annotation.SuppressLint;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,12 +23,11 @@ import com.journeyapps.barcodescanner.BarcodeEncoder;
 
 public class Logs extends AppCompatActivity {
 
-    public Button back_button;
-    public Button copy_button;
-    public Button scan_button;
-
+    public ImageView back_button;
+    public ImageView copy_button;
+    public ImageView scan_button;
+    public ImageView clr_button;
     public ImageView qr;
-
     public TextView list_view;
 
     private boolean QRIsShowed = false;
@@ -39,14 +38,13 @@ public class Logs extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_logs);
-
         this.back_button = findViewById(R.id.bck_btn);
         this.copy_button = findViewById(R.id.copy_btn);
         this.list_view = findViewById(R.id.list_edt);
         this.scan_button = findViewById(R.id.showqr_btn);
         this.qr = findViewById(R.id.qrcode);
         list_view.setText(MainActivity.position.toString());
-
+        this.clr_button = findViewById(R.id.clear_btn2);
         back_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -58,11 +56,21 @@ public class Logs extends AppCompatActivity {
             public void onClick(View view) {
                 String message = MainActivity.position.getHash();
                 if (!message.equals("")) {
-                    ClipboardManager clipboardManager = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
-                    ClipData clipData = ClipData.newPlainText("LOGS",message);
-                    clipboardManager.setPrimaryClip(clipData);
-                    Toast.makeText(getApplicationContext(), "Скопировано в буфер обмена", Toast.LENGTH_SHORT).show();
+                    shareWith(message);
+                    //copyToClipboard(message); Better to use shareWith()
                 }else Toast.makeText(getApplicationContext(), "Нечего копировать!", Toast.LENGTH_SHORT).show();
+            }
+        });
+        clr_button.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("SetTextI18n")
+            @Override
+            public void onClick(View view) {
+                list_view.setText(MainActivity.position.toString());
+                MainActivity.ClearEdits();
+                Emoji emoji = Emoji.values()[(int)(Math.random()*Emoji.values().length)];
+                MainActivity.message_box.setText("\n\t\tВведите значения " + Utils.getEmoji(emoji));
+                MainActivity.position.clear();
+                finish();
             }
         });
         scan_button.setOnClickListener(new View.OnClickListener() {
@@ -81,6 +89,22 @@ public class Logs extends AppCompatActivity {
             }
         });
 
+    }
+    @Deprecated
+    private void copyToClipboard(String message) {
+        // Better to use shareWith()
+        ClipboardManager clipboardManager = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+        ClipData clipData = ClipData.newPlainText("LOGS",message);
+        clipboardManager.setPrimaryClip(clipData);
+        Toast.makeText(getApplicationContext(), "Скопировано в буфер обмена", Toast.LENGTH_SHORT).show();
+    }
+
+    private void shareWith(String message) {
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType("text/plain");
+        String Body = "Поделиться результатом";
+        intent.putExtra(Intent.EXTRA_TEXT,message);
+        startActivity(Intent.createChooser(intent,Body));
     }
 
     private void generateQR(String message) {

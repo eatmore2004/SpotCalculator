@@ -25,8 +25,15 @@
         android:layout_height="60dp"
         android:layout_marginBottom="16dp"
         android:text="Назад"
-        app:cornerRadius="50dp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:cornerRadius="60dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        android:fontFamily="@font/medium"
+        android:textColor="@color/black"
+        android:backgroundTint="#fff"
+        app:iconTint="#EDE2E2"
+        app:strokeColor="@color/buttons"
+        app:strokeWidth="7dp"
+        />
 </androidx.constraintlayout.widget.ConstraintLayout>
