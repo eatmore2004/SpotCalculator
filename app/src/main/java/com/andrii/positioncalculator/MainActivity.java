@@ -26,22 +26,23 @@ public class MainActivity extends AppCompatActivity {
     public ImageView back_button;
     public ImageView journal_button;
     public ImageView positionload_button;
-
-    public ImageView clr_button;
     public ImageView clr_price_button;
     public ImageView clr_amount_button;
     public ImageView clr_fee_button;
 
-    public EditText price_edit;
-    public EditText amount_edit;
-    public EditText fee_edit;
+    @SuppressLint("StaticFieldLeak")
+    public static EditText price_edit;
+    @SuppressLint("StaticFieldLeak")
+    public static EditText amount_edit;
+    @SuppressLint("StaticFieldLeak")
+    public static EditText fee_edit;
     @SuppressLint("StaticFieldLeak")
     public static TextView message_box;
 
     public static Position position;
 
 
-    @SuppressLint("MissingInflatedId")
+    @SuppressLint({"MissingInflatedId", "SetTextI18n"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,10 +56,9 @@ public class MainActivity extends AppCompatActivity {
         this.back_button = findViewById(R.id.back_btn);
         this.journal_button = findViewById(R.id.journal_btn);
         this.positionload_button = findViewById(R.id.loadposition_btn);
-        this.price_edit = findViewById(R.id.price_edt);
-        this.amount_edit = findViewById(R.id.amount_edt);
-        this.fee_edit = findViewById(R.id.fee_edt);
-        this.clr_button = findViewById(R.id.clear_btn);
+        price_edit = findViewById(R.id.price_edt);
+        amount_edit = findViewById(R.id.amount_edt);
+        fee_edit = findViewById(R.id.fee_edt);
         this.clr_price_button = findViewById(R.id.clr_price_btn);
         this.clr_amount_button = findViewById(R.id.clr_amount_btn);
         this.clr_fee_button = findViewById(R.id.clr_fee_btn);
@@ -66,7 +66,11 @@ public class MainActivity extends AppCompatActivity {
 
         message_box = findViewById(R.id.message);
         position = StorageManager.getPosition("current_position");
-        message_box.setText(position.getResponse());
+        String response = position.getResponse();
+        if (response == null){
+            Emoji emoji = Emoji.values()[(int)(Math.random()*Emoji.values().length)];
+            MainActivity.message_box.setText("\n\t\tВведите значения " + Utils.getEmoji(emoji));
+        }else message_box.setText(response);
         buy_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -91,14 +95,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        clr_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ClearEdits();
-                message_box.setText("");
-                position.clear();
-            }
-        });
         clr_price_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -123,8 +119,13 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 ClearEdits();
                 Order last_order = position.stepBack();
-                price_edit.setText(String.format(Locale.US,"%.2f",last_order.getPrice()));
-                amount_edit.setText(String.format(Locale.US,"%.6f",last_order.getAmount()));
+                if (last_order.getPrice() <= 0 || last_order.getAmount() <= 0){
+                    ClearEdits();
+                    Toast.makeText(getApplicationContext(),"Невозможно вернуться на шаг назад!", Toast.LENGTH_SHORT).show();
+                }else{
+                    price_edit.setText(String.format(Locale.US,"%.2f",last_order.getPrice()));
+                    amount_edit.setText(String.format(Locale.US,"%.6f",last_order.getAmount()));
+                }
             }
         });
         journal_button.setOnClickListener(new View.OnClickListener() {
@@ -156,7 +157,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void ClearEdits() {
+    public static void ClearEdits() {
         price_edit.setText("");
         amount_edit.setText("");
         fee_edit.setText("");

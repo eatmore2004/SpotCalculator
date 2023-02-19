@@ -109,16 +109,17 @@
         android:layout_width="357dp"
         android:layout_height="166dp"
         android:layout_marginBottom="28dp"
+        android:background="@drawable/messagebox"
+        android:fontFamily="@font/medium"
         android:textAlignment="textStart"
+        android:textColor="#000000"
         android:textSize="16sp"
         android:textStyle="bold"
-        android:background="@drawable/messagebox"
         app:layout_constraintBottom_toTopOf="@+id/price_edt"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0"
-        android:fontFamily="@font/medium"/>
+        app:layout_constraintVertical_bias="1.0" />
 
     <ImageView
         android:id="@+id/loadposition_btn"
@@ -167,16 +168,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/chart" />
-
-    <ImageView
-        android:id="@+id/clear_btn"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_marginStart="212dp"
-        android:layout_marginBottom="44dp"
-        app:layout_constraintBottom_toBottomOf="@+id/sell_btn"
-        app:layout_constraintStart_toStartOf="@+id/sell_btn"
-        app:srcCompat="@drawable/delete" />
 
     <ImageView
         android:id="@+id/clr_amount_btn"

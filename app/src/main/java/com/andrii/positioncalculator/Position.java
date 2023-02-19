@@ -84,7 +84,7 @@ public class Position {
     @SuppressLint("DefaultLocale")
     public String getResponse() {
 
-        if (buy_orders.isEmpty() && sell_orders.isEmpty()) return "\n\t\tВведите значения";
+        if (buy_orders.isEmpty() && sell_orders.isEmpty()) return null;
         String message = "\n";
         double av_price_buy = getAveragePrice(buy_orders);
         double buyed_amount = getAmount(buy_orders);
