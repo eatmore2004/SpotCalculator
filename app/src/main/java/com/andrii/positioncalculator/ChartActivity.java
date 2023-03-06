@@ -4,21 +4,17 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.andrii.positioncalculator.Helpers.Order;
+import com.andrii.positioncalculator.Helpers.Utils;
 import com.example.positioncalculator.R;
 import com.github.mikephil.charting.animation.Easing;
-import com.github.mikephil.charting.charts.BarChart;
-import com.github.mikephil.charting.charts.HorizontalBarChart;
 import com.github.mikephil.charting.charts.PieChart;
-import com.github.mikephil.charting.components.Description;
 import com.github.mikephil.charting.components.Legend;
-import com.github.mikephil.charting.data.BarData;
-import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
@@ -27,9 +23,8 @@ import com.github.mikephil.charting.formatter.PercentFormatter;
 import com.github.mikephil.charting.utils.ColorTemplate;
 
 import java.util.ArrayList;
-import java.util.List;
 
-public class ChartAct extends AppCompatActivity {
+public class ChartActivity extends AppCompatActivity {
     PieChart pieChart;
     Button back_button;
     private ArrayList<BarEntry> barArrayList;
@@ -91,7 +86,7 @@ public class ChartAct extends AppCompatActivity {
     @NonNull
     private ArrayList<PieEntry> getData(){
         ArrayList<PieEntry> entries = new ArrayList<>();
-        ArrayList<Order> orders = Utils.getStats(MainActivity.position);
+        ArrayList<Order> orders = Utils.getStatsByPosition(MainActivity.position);
         if (orders != null) {
             for (int i = 0; i < orders.size(); i++) {
                 float amount = (float)orders.get(i).getAmount();

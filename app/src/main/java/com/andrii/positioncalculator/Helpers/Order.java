@@ -1,4 +1,4 @@
-package com.andrii.positioncalculator;
+package com.andrii.positioncalculator.Helpers;
 
 import androidx.annotation.Nullable;
 

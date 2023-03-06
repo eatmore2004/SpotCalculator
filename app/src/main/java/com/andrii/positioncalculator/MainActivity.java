@@ -1,5 +1,4 @@
 package com.andrii.positioncalculator;
-import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -7,11 +6,17 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.andrii.positioncalculator.Helpers.Emoji;
+import com.andrii.positioncalculator.Helpers.Order;
+import com.andrii.positioncalculator.Helpers.Position;
+import com.andrii.positioncalculator.Helpers.StorageManager;
+import com.andrii.positioncalculator.Helpers.Utils;
 import com.example.positioncalculator.R;
 
 import java.util.Locale;
@@ -25,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
     public ImageView stats_button;
     public ImageView back_button;
     public ImageView journal_button;
+    public ImageView settings_button;
     public ImageView positionload_button;
     public ImageView clr_price_button;
     public ImageView clr_amount_button;
@@ -50,27 +56,9 @@ public class MainActivity extends AppCompatActivity {
 
         Paper.init(getApplicationContext());
 
-        this.buy_button = findViewById(R.id.buy_btn);
-        this.sell_button = findViewById(R.id.sell_btn);
-        this.stats_button = findViewById(R.id.stats_btn);
-        this.back_button = findViewById(R.id.back_btn);
-        this.journal_button = findViewById(R.id.journal_btn);
-        this.positionload_button = findViewById(R.id.loadposition_btn);
-        price_edit = findViewById(R.id.price_edt);
-        amount_edit = findViewById(R.id.amount_edt);
-        fee_edit = findViewById(R.id.fee_edt);
-        this.clr_price_button = findViewById(R.id.clr_price_btn);
-        this.clr_amount_button = findViewById(R.id.clr_amount_btn);
-        this.clr_fee_button = findViewById(R.id.clr_fee_btn);
+        initInterface();
+        initPosition();
 
-
-        message_box = findViewById(R.id.message);
-        position = StorageManager.getPosition("current_position");
-        String response = position.getResponse();
-        if (response == null){
-            Emoji emoji = Emoji.values()[(int)(Math.random()*Emoji.values().length)];
-            MainActivity.message_box.setText("\n\t\tВведите значения " + Utils.getEmoji(emoji));
-        }else message_box.setText(response);
         buy_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -131,7 +119,7 @@ public class MainActivity extends AppCompatActivity {
         journal_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this,Logs.class);
+                Intent intent = new Intent(MainActivity.this, LogsActivity.class);
                 startActivity(intent);
             }
         });
@@ -139,7 +127,7 @@ public class MainActivity extends AppCompatActivity {
         positionload_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this,AddPosition.class);
+                Intent intent = new Intent(MainActivity.this, AddPositionActivity.class);
                 startActivity(intent);
             }
         });
@@ -147,14 +135,48 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (!position.getBuy_orders().isEmpty()){
-                    Intent intent = new Intent(MainActivity.this,ChartAct.class);
+                    Intent intent = new Intent(MainActivity.this, ChartActivity.class);
                     startActivity(intent);
                 }else{
                     Toast.makeText(getApplicationContext(),"Совершите хотя бы одну покупку", Toast.LENGTH_SHORT).show();
                 }
             }
         });
+        settings_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this,SettingsActivity.class);
+                startActivity(intent);
+            }
+        });
 
+    }
+
+    private void initInterface() {
+        this.buy_button = findViewById(R.id.buy_btn);
+        this.sell_button = findViewById(R.id.sell_btn);
+        this.stats_button = findViewById(R.id.stats_btn);
+        this.back_button = findViewById(R.id.back_btn);
+        this.journal_button = findViewById(R.id.journal_btn);
+        this.positionload_button = findViewById(R.id.loadposition_btn);
+        price_edit = findViewById(R.id.price_edt);
+        amount_edit = findViewById(R.id.amount_edt);
+        fee_edit = findViewById(R.id.fee_edt);
+        this.clr_price_button = findViewById(R.id.clr_price_btn);
+        this.clr_amount_button = findViewById(R.id.clr_amount_btn);
+        this.clr_fee_button = findViewById(R.id.clr_fee_btn);
+        this.settings_button = findViewById(R.id.settings_btn);
+        message_box = findViewById(R.id.message);
+    }
+
+    @SuppressLint("SetTextI18n")
+    private void initPosition() {
+        position = StorageManager.getPosition("current_position");
+        String response = position.getResponse();
+        if (response == null){
+            Emoji emoji = Emoji.values()[(int)(Math.random()*Emoji.values().length)];
+            MainActivity.message_box.setText("\n\t\tВведите значения " + Utils.getEmoji(emoji));
+        }else message_box.setText(response);
     }
 
     public static void ClearEdits() {

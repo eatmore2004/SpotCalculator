@@ -18,18 +18,17 @@
         android:layout_width="195dp"
         android:layout_height="47dp"
         android:layout_marginStart="50dp"
-        android:layout_marginTop="224dp"
+        android:layout_marginTop="188dp"
         android:layout_marginEnd="50dp"
-        android:ems="10"
-        android:paddingStart="12dp"
-        android:paddingEnd="12dp"
+        android:background="@drawable/edit_style"
         android:drawableStart="@drawable/baseline_attach_money_24"
         android:drawablePadding="6dp"
-        android:background="@drawable/edit_style"
+        android:ems="10"
         android:hint="Цена"
         android:inputType="numberSigned|numberDecimal"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.499"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -92,22 +91,23 @@
         android:layout_width="195dp"
         android:layout_height="70dp"
         android:layout_marginStart="100dp"
+        android:layout_marginTop="88dp"
         android:layout_marginEnd="100dp"
         android:backgroundTint="#D9337F"
         android:text="Продать"
         app:cornerRadius="60dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.562"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/fee_edt"
-        app:layout_constraintVertical_bias="0.3"
         app:strokeColor="@color/buttons"
         app:strokeWidth="7dp" />
 
     <TextView
         android:id="@+id/message"
-        android:layout_width="357dp"
-        android:layout_height="166dp"
+        android:layout_width="355dp"
+        android:layout_height="162dp"
+        android:layout_marginTop="10dp"
         android:layout_marginBottom="28dp"
         android:background="@drawable/messagebox"
         android:fontFamily="@font/medium"
@@ -119,7 +119,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <ImageView
         android:id="@+id/loadposition_btn"
@@ -129,7 +129,7 @@
         android:layout_marginBottom="32dp"
         android:text="загрузить"
         app:cornerRadius="10dp"
-        app:layout_constraintBottom_toTopOf="@+id/stats_btn"
+        app:layout_constraintBottom_toTopOf="@+id/settings_btn"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/add" />
 
@@ -158,7 +158,7 @@
         app:srcCompat="@drawable/back" />
 
     <ImageView
-        android:id="@+id/stats_btn"
+        android:id="@+id/settings_btn"
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_marginEnd="88dp"
@@ -167,6 +167,19 @@
         app:cornerRadius="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/settings" />
+
+    <ImageView
+        android:id="@+id/stats_btn"
+        android:layout_width="62dp"
+        android:layout_height="68dp"
+        android:layout_marginTop="36dp"
+        android:text="График"
+        app:cornerRadius="10dp"
+        app:layout_constraintEnd_toStartOf="@+id/buy_btn"
+        app:layout_constraintHorizontal_bias="0.41"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/buy_btn"
         app:srcCompat="@drawable/chart" />
 
     <ImageView

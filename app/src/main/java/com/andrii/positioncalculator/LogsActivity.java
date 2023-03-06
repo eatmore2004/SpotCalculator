@@ -1,7 +1,5 @@
 package com.andrii.positioncalculator;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.annotation.SuppressLint;
 import android.content.ClipData;
 import android.content.ClipboardManager;
@@ -14,6 +12,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.andrii.positioncalculator.Helpers.Emoji;
+import com.andrii.positioncalculator.Helpers.Utils;
 import com.example.positioncalculator.R;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.MultiFormatWriter;
@@ -21,7 +23,7 @@ import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 import com.journeyapps.barcodescanner.BarcodeEncoder;
 
-public class Logs extends AppCompatActivity {
+public class LogsActivity extends AppCompatActivity {
 
     public ImageView back_button;
     public ImageView copy_button;
