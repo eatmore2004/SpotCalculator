@@ -13,11 +13,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.andrii.positioncalculator.Helpers.Direction;
+import com.andrii.positioncalculator.Helpers.Position;
 import com.example.positioncalculator.R;
 import com.journeyapps.barcodescanner.ScanContract;
 import com.journeyapps.barcodescanner.ScanOptions;
 
-public class AddPosition extends AppCompatActivity {
+public class AddPositionActivity extends AppCompatActivity {
     private Vibrator vibrator;
     public Button return_button;
     public ImageView load_button;
@@ -72,7 +74,7 @@ public class AddPosition extends AppCompatActivity {
         options.setPrompt("Наведите на QR code");
         options.setBeepEnabled(false);
         options.setOrientationLocked(true);
-        options.setCaptureActivity(CaptureAct.class);
+        options.setCaptureActivity(CaptureActivity.class);
         barLauncher.launch(options);
     }
     private void Analyze(String hash){

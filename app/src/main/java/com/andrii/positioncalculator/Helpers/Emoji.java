@@ -1,4 +1,4 @@
-package com.andrii.positioncalculator;
+package com.andrii.positioncalculator.Helpers;
 
 public enum Emoji {
     SMILE,
