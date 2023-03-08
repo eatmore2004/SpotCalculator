@@ -113,7 +113,7 @@
         android:fontFamily="@font/medium"
         android:textAlignment="textStart"
         android:textColor="#000000"
-        android:textSize="16sp"
+        android:textSize="16dip"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/price_edt"
         app:layout_constraintEnd_toEndOf="parent"

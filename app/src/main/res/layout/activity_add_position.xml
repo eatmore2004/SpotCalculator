@@ -113,9 +113,10 @@
         android:layout_marginTop="28dp"
         android:background="@drawable/messagebox"
         android:fontFamily="@font/medium"
+        android:text="\n Внимание! Предыдущая позиция и все результаты подсчетов будут безвозвратно стерты после загрузки новой позиции. Скопируйте ее ключ перед загрузкой нового "
         android:textAlignment="center"
         android:textColor="#D32121"
-        android:text="\n Внимание! Предыдущая позиция и все результаты подсчетов будут безвозвратно стерты после загрузки новой позиции. Скопируйте ее ключ перед загрузкой нового "
+        android:textSize="14dip"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
