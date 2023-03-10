@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFFFF"
-    tools:context="com.andrii.positioncalculator.AddPositionActivity">
+    tools:context="com.andrii.positioncalculator.Activities.AddPositionActivity">
 
     <ImageView
         android:id="@+id/load_btn"

@@ -1,11 +1,15 @@
 package com.andrii.positioncalculator.Helpers;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
+import java.util.UUID;
 
 public class Order {
 
-    private double Price;
-    private double Amount;
+    private final double Price;
+    private final double Amount;
+    public UUID ID;
     private final double NoFeeAmount;
 
     private Direction direction;
@@ -14,6 +18,7 @@ public class Order {
         this.Amount = amount;
         this.Price = price;
         this.NoFeeAmount = noFeeAmount;
+        ID = UUID.randomUUID();
     }
 
     public Direction getDirection() {
@@ -28,16 +33,8 @@ public class Order {
         return Price;
     }
 
-    public void setPrice(double price) {
-        Price = price;
-    }
-
     public double getAmount() {
         return Amount;
-    }
-
-    public void setAmount(double amount) {
-        Amount = amount;
     }
 
     public double getInitialAmount() {
@@ -52,5 +49,10 @@ public class Order {
         if (obj != null && !(obj.getClass() == Order.class)) return false;
         Order order = (Order) obj;
         return (order != null && order.getAmount() == Amount && order.getPrice() == Price && order.getInitialAmount() == NoFeeAmount);
+    }
+    @NonNull
+    @Override
+    public String toString() {
+        return "Цена "+ getPrice() + " / Кол-во "+ getAmount() +" (" + Math.round(getPrice() * getAmount())+"$)";
     }
 }

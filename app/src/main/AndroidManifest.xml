@@ -18,23 +18,23 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PositionCalculator"
         tools:targetApi="31">
-        <service android:name="com.andrii.positioncalculator.Services.APIFetchService"
+        <service android:name="com.andrii.positioncalculator.Services.TickerService"
             android:foregroundServiceType="dataSync|location|mediaPlayback"/>
         <activity
-            android:name="com.andrii.positioncalculator.ChartActivity"
+            android:name="com.andrii.positioncalculator.Activities.ChartActivity"
             android:exported="false" />
         <activity
-            android:name="com.andrii.positioncalculator.AddPositionActivity"
+            android:name="com.andrii.positioncalculator.Activities.AddPositionActivity"
             android:exported="false"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name="com.andrii.positioncalculator.LogsActivity"
+            android:name="com.andrii.positioncalculator.Activities.LogsActivity"
             android:exported="false"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name="com.andrii.positioncalculator.MainActivity"
+            android:name="com.andrii.positioncalculator.Activities.MainActivity"
             android:exported="true"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity">
@@ -45,13 +45,13 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.andrii.positioncalculator.CaptureActivity"
+            android:name="com.andrii.positioncalculator.Activities.CaptureActivity"
             android:screenOrientation="portrait"
             android:stateNotNeeded="true"
             android:theme="@style/zxing_CaptureTheme"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name="com.andrii.positioncalculator.SettingsActivity"
+            android:name="com.andrii.positioncalculator.Activities.SettingsActivity"
             android:screenOrientation="portrait"
             android:stateNotNeeded="true"
             tools:ignore="LockedOrientationActivity" />

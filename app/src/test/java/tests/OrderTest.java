@@ -22,15 +22,15 @@ public class OrderTest {
     public void testEquals() {
         Order order1 = new Order(22300.1,0.002,0.001);
         Order order2 = new Order(22300.10,0.0020,0.0010);
-
-        Assert.assertTrue(order1.equals(order2));
+        boolean IsEquals = order1.equals(order2);
+        Assert.assertTrue(IsEquals);
     }
     @Test
     public void testNotEquals() {
         Order order1 = new Order(22300.1,0.002,0.001);
         Order order2 = new Order(22302.10,0.020,0.10);
-
-        Assert.assertFalse(order1.equals(order2));
+        boolean IsEquals = order1.equals(order2);
+        Assert.assertFalse(IsEquals);
     }
     @Test
     public void TestGetInt(){

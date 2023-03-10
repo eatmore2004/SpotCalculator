@@ -10,11 +10,11 @@ public class Position {
 
     public Direction direction = Direction.BUY;
 
-    private final ArrayList<Order> journal = new ArrayList<>();
+    public final ArrayList<Order> journal = new ArrayList<>();
     private final ArrayList<Order> buy_orders = new ArrayList<>();
     private final ArrayList<Order> sell_orders = new ArrayList<>();
-
     public final String SEPARATOR_O = ":";
+
     public final String SEPARATOR_P = "/";
 
     public Position(){
@@ -82,7 +82,7 @@ public class Position {
     }
 
     @SuppressLint("DefaultLocale")
-    public String getResponse() {
+    public String getShortResponse() {
 
         if (buy_orders.isEmpty() && sell_orders.isEmpty()) return null;
         String message = "\n";
@@ -161,8 +161,8 @@ public class Position {
 
         StringBuilder message = new StringBuilder();
         message.append(">>>>>> Итоги >>>>>>\n\n");
-        message.append("\tВсего куплено : ").append(getAmount(buy_orders)).append(" BTC\n");
-        message.append("\tВсего продано : ").append(getAmount(sell_orders)).append(" BTC\n");
+        message.append("\tВсего куплено : ").append(String.format("%.5f",getAmount(buy_orders))).append(" BTC\n");
+        message.append("\tВсего продано : ").append(String.format("%.5f",getAmount(sell_orders))).append(" BTC\n");
         message.append("\tОстаеться в позиции : ").append(String.format("%.5f",getAmount(buy_orders) - getAmount(sell_orders))).append(" BTC\n");
         double av_buy = getAveragePrice(buy_orders);
         double av_sell = getAveragePrice(sell_orders);
@@ -172,19 +172,7 @@ public class Position {
         if (sell_orders.size() > 0 && buy_orders.size() > 0){
             message.append(String.format("%.3f",getProfit(getAmount(sell_orders),av_sell,av_buy))).append(" USDT \n");
         }else message.append("НЕИЗВЕСТНО USDT \n");
-        message.append("\n>>>>>> История торгов >>>>>>\n\n");
-        for (int i = 0; i < journal.size(); i++) {
-            Order order = journal.get(i);
-            double price = order.getPrice();
-            double amount = order.getAmount();
-            String direction = "";
-            switch(order.getDirection()){
-                case BUY : direction = "BUY"; break;
-                case SELL : direction = "SELL"; break;
-            }
-            if (direction.isEmpty()) return "ERROR";
-            message.append("\t").append(direction).append(" : ").append(price).append(" на ").append(amount).append("BTC (≈").append(Math.round(price * amount)).append(" USDT)\n");
-        }
+        message.append("\tВсего трейдов произведено: ").append(journal.size()).append(" раз");
         return message.toString();
     }
 
@@ -228,4 +216,12 @@ public class Position {
         }
         return true;
     }
+
+    public void removeOrder(Order order) {
+        Direction dir = order.getDirection();
+        if (dir == Direction.BUY) buy_orders.remove(order);
+        else sell_orders.remove(order);
+        journal.remove(order);
+    }
+
 }
