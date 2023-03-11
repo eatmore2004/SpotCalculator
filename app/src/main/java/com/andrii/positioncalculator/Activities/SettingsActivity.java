@@ -122,7 +122,7 @@ public class SettingsActivity extends AppCompatActivity {
             notification_status.setTextColor(Color.parseColor("#08BC11"));
 
         }else{
-            notification_status.setText("Нективно");
+            notification_status.setText("Неaктивно");
             notification_status.setTextColor(Color.parseColor("#D50000"));
         }
     }

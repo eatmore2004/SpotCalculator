@@ -104,4 +104,31 @@
         android:textSize="14dip"
         app:layout_constraintEnd_toStartOf="@+id/clear_btn2"
         app:layout_constraintTop_toTopOf="@+id/clear_btn2" />
+
+    <TextView
+        android:id="@+id/textView12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:fontFamily="@font/medium"
+        android:text="QRCode"
+        android:textColor="@color/buttons"
+        android:textSize="13dip"
+        app:layout_constraintEnd_toEndOf="@+id/showqr_btn"
+        app:layout_constraintStart_toStartOf="@+id/showqr_btn"
+        app:layout_constraintTop_toTopOf="@+id/showqr_btn" />
+
+    <TextView
+        android:id="@+id/textView13"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:fontFamily="@font/medium"
+        android:text="Копировать"
+        android:textColor="@color/buttons"
+        android:textSize="13dip"
+        app:layout_constraintEnd_toEndOf="@+id/copy_btn"
+        app:layout_constraintStart_toStartOf="@+id/copy_btn"
+        app:layout_constraintTop_toTopOf="@+id/copy_btn" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
