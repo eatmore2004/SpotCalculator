@@ -22,12 +22,12 @@ import com.example.positioncalculator.R;
 import java.util.List;
 
 
-public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
+public class LogsListAdapter extends RecyclerView.Adapter<LogsListAdapter.ViewHolder> {
 
     private final List<Order> orderList;
     private final Context mContext;
 
-    public MyAdapter(Context context, List<Order> orders) {
+    public LogsListAdapter(Context context, List<Order> orders) {
         this.orderList = orders;
         mContext = context;
     }

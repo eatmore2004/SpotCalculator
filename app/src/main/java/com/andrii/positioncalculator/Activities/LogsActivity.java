@@ -16,7 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.andrii.positioncalculator.Adapters.MyAdapter;
+import com.andrii.positioncalculator.Adapters.LogsListAdapter;
 import com.andrii.positioncalculator.Helpers.Emoji;
 import com.andrii.positioncalculator.Helpers.Position;
 import com.andrii.positioncalculator.Helpers.StorageManager;
@@ -99,7 +99,7 @@ public class LogsActivity extends AppCompatActivity {
     private void loadNodes(Position position) {;
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(new MyAdapter(this,MainActivity.position.journal));
+        recyclerView.setAdapter(new LogsListAdapter(this,MainActivity.position.journal));
     }
 
     private void initInterface() {
