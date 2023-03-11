@@ -1,14 +1,16 @@
-package com.andrii.positioncalculator;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
+package com.andrii.positioncalculator.Activities;
 
 import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Switch;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.andrii.positioncalculator.Helpers.Direction;
 import com.andrii.positioncalculator.Helpers.Order;
 import com.andrii.positioncalculator.Helpers.Utils;
 import com.example.positioncalculator.R;
@@ -26,6 +28,9 @@ import java.util.ArrayList;
 
 public class ChartActivity extends AppCompatActivity {
     PieChart pieChart;
+    Direction chart_direction;
+    @SuppressLint("UseSwitchCompatOrMaterialCode")
+    public Switch chart_switch;
     Button back_button;
     private ArrayList<BarEntry> barArrayList;
 
@@ -35,6 +40,9 @@ public class ChartActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chart);
         pieChart = findViewById(R.id.chart);
+        chart_switch = findViewById(R.id.switch_chart);
+        chart_switch.setChecked(false);
+        chart_direction = Direction.BUY;
         setupPieChart();
         loadPieChartData();
         back_button = findViewById(R.id.bck2_btn);
@@ -42,6 +50,13 @@ public class ChartActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 finish();
+            }
+        });
+        chart_switch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                chart_direction = chart_switch.isChecked() ? Direction.SELL : Direction.BUY;
+                loadPieChartData();
             }
         });
 
@@ -60,7 +75,6 @@ public class ChartActivity extends AppCompatActivity {
     }
 
     private void loadPieChartData() {
-
         ArrayList<PieEntry> entries = getData();
         ArrayList<Integer> colors = new ArrayList<>();
         for (int color: ColorTemplate.MATERIAL_COLORS) {
@@ -86,7 +100,7 @@ public class ChartActivity extends AppCompatActivity {
     @NonNull
     private ArrayList<PieEntry> getData(){
         ArrayList<PieEntry> entries = new ArrayList<>();
-        ArrayList<Order> orders = Utils.getStatsByPosition(MainActivity.position);
+        ArrayList<Order> orders = Utils.getStatsByPosition(MainActivity.position, chart_direction);
         if (orders != null) {
             for (int i = 0; i < orders.size(); i++) {
                 float amount = (float)orders.get(i).getAmount();

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.andrii.positioncalculator.MainActivity">
+    tools:context="com.andrii.positioncalculator.Activities.MainActivity">
 
     <androidx.constraintlayout.widget.Barrier
         android:layout_width="wrap_content"
@@ -113,7 +113,7 @@
         android:fontFamily="@font/medium"
         android:textAlignment="textStart"
         android:textColor="#000000"
-        android:textSize="16sp"
+        android:textSize="16dip"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/price_edt"
         app:layout_constraintEnd_toEndOf="parent"
@@ -150,7 +150,7 @@
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_marginStart="88dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="28dp"
         android:text="вернуть"
         app:cornerRadius="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -162,7 +162,7 @@
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_marginEnd="88dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="28dp"
         android:text="График"
         app:cornerRadius="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -211,5 +211,67 @@
         android:src="@drawable/remove"
         app:layout_constraintStart_toEndOf="@+id/fee_edt"
         app:layout_constraintTop_toTopOf="@+id/fee_edt" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/medium"
+        android:text="График"
+        android:textColor="@color/buttons"
+        android:textSize="13dip"
+        app:layout_constraintEnd_toEndOf="@+id/stats_btn"
+        app:layout_constraintStart_toStartOf="@+id/stats_btn"
+        app:layout_constraintTop_toBottomOf="@+id/stats_btn" />
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:fontFamily="@font/medium"
+        android:text="Журнал"
+        android:textColor="@color/buttons"
+        android:textSize="13dip"
+        app:layout_constraintEnd_toEndOf="@+id/journal_btn"
+        app:layout_constraintStart_toStartOf="@+id/journal_btn"
+        app:layout_constraintTop_toTopOf="@+id/journal_btn" />
+
+    <TextView
+        android:id="@+id/textView11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/medium"
+        android:text="Загрузка"
+        android:textColor="@color/buttons"
+        android:textSize="13dip"
+        app:layout_constraintEnd_toEndOf="@+id/loadposition_btn"
+        app:layout_constraintStart_toStartOf="@+id/loadposition_btn"
+        app:layout_constraintTop_toBottomOf="@+id/loadposition_btn" />
+
+    <TextView
+        android:id="@+id/textView14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/medium"
+        android:text="Вернуть"
+        android:textColor="@color/buttons"
+        android:textSize="13dip"
+        app:layout_constraintEnd_toEndOf="@+id/back_btn"
+        app:layout_constraintStart_toStartOf="@+id/back_btn"
+        app:layout_constraintTop_toBottomOf="@+id/back_btn" />
+
+    <TextView
+        android:id="@+id/textView15"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="1dp"
+        android:fontFamily="@font/medium"
+        android:text="Настройки"
+        android:textColor="@color/buttons"
+        android:textSize="13dip"
+        app:layout_constraintEnd_toEndOf="@+id/settings_btn"
+        app:layout_constraintStart_toStartOf="@+id/settings_btn"
+        app:layout_constraintTop_toBottomOf="@+id/settings_btn" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

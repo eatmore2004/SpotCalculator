@@ -1,4 +1,4 @@
-package com.andrii.positioncalculator;
+package com.andrii.positioncalculator.Activities;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         Paper.init(getApplicationContext());
-
+        position = StorageManager.getPosition("current_position");
         initInterface();
         initPosition();
 
@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
                 if (order != null){
                     position.addBuy(order);
                     ClearEdits();
-                    message_box.setText(position.getResponse());
+                    message_box.setText(position.getShortResponse());
                 }
             }
         });
@@ -78,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
                 if (order != null){
                     position.addSell(order);
                     ClearEdits();
-                    message_box.setText(position.getResponse());
+                    message_box.setText(position.getShortResponse());
                 }
             }
         });
@@ -170,9 +170,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @SuppressLint("SetTextI18n")
-    private void initPosition() {
-        position = StorageManager.getPosition("current_position");
-        String response = position.getResponse();
+    public static void initPosition() {
+        String response = position.getShortResponse();
         if (response == null){
             Emoji emoji = Emoji.values()[(int)(Math.random()*Emoji.values().length)];
             MainActivity.message_box.setText("\n\t\tВведите значения " + Utils.getEmoji(emoji));
@@ -213,5 +212,9 @@ public class MainActivity extends AppCompatActivity {
         StorageManager.savePosition("current_position",position);
     }
 
-
+    @Override
+    protected void onResume() {
+        super.onResume();
+        initPosition();
+    }
 }

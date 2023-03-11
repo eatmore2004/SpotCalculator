@@ -1,4 +1,4 @@
-package com.andrii.positioncalculator;
+package com.andrii.positioncalculator.Activities;
 
 import android.annotation.SuppressLint;
 import android.content.ClipData;
@@ -13,8 +13,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.andrii.positioncalculator.Adapters.MyAdapter;
 import com.andrii.positioncalculator.Helpers.Emoji;
+import com.andrii.positioncalculator.Helpers.Position;
+import com.andrii.positioncalculator.Helpers.StorageManager;
 import com.andrii.positioncalculator.Helpers.Utils;
 import com.example.positioncalculator.R;
 import com.google.zxing.BarcodeFormat;
@@ -30,8 +35,7 @@ public class LogsActivity extends AppCompatActivity {
     public ImageView scan_button;
     public ImageView clr_button;
     public ImageView qr;
-    public TextView list_view;
-
+    public static TextView stats_box;
     private boolean QRIsShowed = false;
 
 
@@ -40,13 +44,9 @@ public class LogsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_logs);
-        this.back_button = findViewById(R.id.bck_btn);
-        this.copy_button = findViewById(R.id.copy_btn);
-        this.list_view = findViewById(R.id.list_edt);
-        this.scan_button = findViewById(R.id.showqr_btn);
-        this.qr = findViewById(R.id.qrcode);
-        list_view.setText(MainActivity.position.toString());
-        this.clr_button = findViewById(R.id.clear_btn2);
+        initInterface();
+        reloadStats();
+        loadNodes(MainActivity.position);
         back_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -67,7 +67,6 @@ public class LogsActivity extends AppCompatActivity {
             @SuppressLint("SetTextI18n")
             @Override
             public void onClick(View view) {
-                list_view.setText(MainActivity.position.toString());
                 MainActivity.ClearEdits();
                 Emoji emoji = Emoji.values()[(int)(Math.random()*Emoji.values().length)];
                 MainActivity.message_box.setText("\n\t\tВведите значения " + Utils.getEmoji(emoji));
@@ -92,6 +91,26 @@ public class LogsActivity extends AppCompatActivity {
         });
 
     }
+
+    public static void reloadStats() {
+        stats_box.setText(MainActivity.position.toString());
+    }
+
+    private void loadNodes(Position position) {;
+        RecyclerView recyclerView = findViewById(R.id.recyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(new MyAdapter(this,MainActivity.position.journal));
+    }
+
+    private void initInterface() {
+        this.stats_box = findViewById(R.id.stats_box);
+        this.back_button = findViewById(R.id.bck_btn);
+        this.copy_button = findViewById(R.id.copy_btn);
+        this.scan_button = findViewById(R.id.showqr_btn);
+        this.qr = findViewById(R.id.qrcode);
+        this.clr_button = findViewById(R.id.clear_btn2);
+    }
+
     @Deprecated
     private void copyToClipboard(String message) {
         // Better to use shareWith()
@@ -124,5 +143,17 @@ public class LogsActivity extends AppCompatActivity {
     private void ShowQR(boolean state){
         qr.setVisibility((state) ? View.VISIBLE : View.GONE);
         QRIsShowed = state;
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        StorageManager.savePosition("current_position",MainActivity.position);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        reloadStats();
     }
 }

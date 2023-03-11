@@ -1,7 +1,4 @@
-package com.andrii.positioncalculator;
-
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.appcompat.app.AppCompatActivity;
+package com.andrii.positioncalculator.Activities;
 
 import android.annotation.SuppressLint;
 import android.content.ClipboardManager;
@@ -12,6 +9,9 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.andrii.positioncalculator.Helpers.Direction;
 import com.andrii.positioncalculator.Helpers.Position;
@@ -81,7 +81,7 @@ public class AddPositionActivity extends AppCompatActivity {
         Position new_position = new Position(hash);
         if (new_position.direction == Direction.NONE){
             MainActivity.position = new_position;
-            MainActivity.message_box.setText(MainActivity.position.getResponse());
+            MainActivity.message_box.setText(MainActivity.position.getShortResponse());
             finish();
         }else{
             hash_edit.setText("");

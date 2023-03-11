@@ -4,12 +4,12 @@ import java.util.ArrayList;
 
 public class Utils {
 
-    public static ArrayList<Order> getStatsByPosition(Position position){
+    public static ArrayList<Order> getStatsByPosition(Position position, Direction chart_direction){
         if (position.getHash().equals("")) return null;
-        ArrayList<Order> buyed = position.getBuy_orders();
+        ArrayList<Order> orders = (chart_direction == Direction.BUY)? position.getBuy_orders() : position.getSell_orders();
         ArrayList<Order> result = new ArrayList<>();
-        for (int i = 0; i < buyed.size(); i++) {
-            Order order = buyed.get(i);
+        for (int i = 0; i < orders.size(); i++) {
+            Order order = orders.get(i);
             int order_price = order.getPriceInt();
             int index = OrderListContains(result,order_price);
             if(index == -1){
